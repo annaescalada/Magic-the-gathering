@@ -1,24 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
+import 'milligram';
 import './App.css';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import Home from '../src/pages/Home'
+import CardsList from '../src/pages/CardsList'
+import CardDetails from '../src/pages/CardDetails'
+import NotFound from '../src/pages/NotFound'
+import Navbar from './pages/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <header>
+          <h1>Magic The Gathering</h1>
+          <Navbar />
+        </header>
+        <Switch>
+          <Route path='/' exact component={Home}/>
+          <Route path='/cards' exact component={CardsList}/>
+          <Route path='/cards/:id' exact component={CardDetails}/>
+          <Route component={NotFound}/>
+        </Switch>
+      </Router>
     </div>
   );
 }
